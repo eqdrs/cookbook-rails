@@ -70,4 +70,57 @@ feature 'Visitor visit homepage' do
     expect(page).to have_content('Ainda não temos nenhuma receita. '\
                                  'Que tal enviar uma?')
   end
+
+  scenario 'and view six last recipes' do
+    recipe_type = RecipeType.create(name: 'Sobremesa')
+    cuisine = Cuisine.create(name: 'Brasileira')
+    carrot_cake = Recipe.create(title: 'Bolo de cenoura', recipe_type: recipe_type,
+                           cuisine: cuisine, difficulty: 'Médio',
+                           cook_time: 60,
+                           ingredients: 'Farinha, açucar, cenoura',
+                           cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
+    orange_cake = Recipe.create(title: 'Bolo de laranja', recipe_type: recipe_type,
+                           cuisine: cuisine, difficulty: 'Médio',
+                           cook_time: 60,
+                           ingredients: 'Farinha, laranjas, açúcar',
+                           cook_method: 'Misture e coloque no forno.')
+    strawberry_cake = Recipe.create(title: 'Bolo de morango', recipe_type: recipe_type,
+                           cuisine: cuisine, difficulty: 'Médio',
+                           cook_time: 60,
+                           ingredients: 'Farinha, morangos, açúcar',
+                           cook_method: 'Misture e coloque no forno.')
+    blueberry_cake = Recipe.create(title: 'Bolo de mirtilo', recipe_type: recipe_type,
+                           cuisine: cuisine, difficulty: 'Médio',
+                           cook_time: 60,
+                           ingredients: 'Farinha, mirtilo, açúcar',
+                           cook_method: 'Misture e coloque no forno.')
+    chocolate_cake = Recipe.create(title: 'Bolo de chocolate', recipe_type: recipe_type,
+                           cuisine: cuisine, difficulty: 'Médio',
+                           cook_time: 60,
+                           ingredients: 'Farinha, chocolate, açúcar',
+                           cook_method: 'Misture e coloque no forno.')
+    corn_cake = Recipe.create(title: 'Bolo de milho', recipe_type: recipe_type,
+                           cuisine: cuisine, difficulty: 'Médio',
+                           cook_time: 60,
+                           ingredients: 'Farinha, milho, açúcar',
+                           cook_method: 'Misture e coloque no forno.')
+    banana_cake = Recipe.create(title: 'Bolo de banana', recipe_type: recipe_type,
+                           cuisine: cuisine, difficulty: 'Médio',
+                           cook_time: 60,
+                           ingredients: 'Farinha, banana, açúcar',
+                           cook_method: 'Misture e coloque no forno.')
+
+    visit root_path
+
+    within("section#last-recipes") do
+      expect(page).not_to have_content(carrot_cake.title)
+      expect(page).to have_css('h3', text: 'Últimas receitas')
+      expect(page).to have_content(orange_cake.title)
+      expect(page).to have_content(strawberry_cake.title)
+      expect(page).to have_content(blueberry_cake.title)
+      expect(page).to have_content(chocolate_cake.title)
+      expect(page).to have_content(corn_cake.title)
+      expect(page).to have_content(banana_cake.title)
+    end
+  end
 end

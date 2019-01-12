@@ -13,7 +13,9 @@ feature 'User update recipe' do
 
     # simula a ação do usuário
     visit root_path
-    click_on 'Bolodecenoura'
+    within("section#all-recipes") do
+      click_on 'Bolodecenoura'
+    end
     click_on 'Editar'
 
     fill_in 'Título', with: 'Bolo de cenoura'
@@ -46,7 +48,9 @@ feature 'User update recipe' do
 
     # simula a ação do usuário
     visit root_path
-    click_on 'Bolodecenoura'
+    within("section#all-recipes") do
+      click_on 'Bolodecenoura'
+    end
     click_on 'Editar'
 
     fill_in 'Título', with: ''

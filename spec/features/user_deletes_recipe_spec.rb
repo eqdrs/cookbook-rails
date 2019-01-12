@@ -11,7 +11,9 @@ feature 'User deletes recipe' do
                            cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
     
     visit root_path
-    click_on 'Bolo de cenoura'
+    within("section#all-recipes") do
+      click_on 'Bolo de cenoura'
+    end
     click_on 'Apagar'
 
     expect(current_path).to eq root_path
