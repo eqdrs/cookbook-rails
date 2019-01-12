@@ -2,7 +2,7 @@
   <p>Você deve informar o nome do tipo de receita</p>
 <% end %>
 
-<%= form_with model: recipe_type, class: 'mt-4' do |f| %>
+<%= form_with model: recipe_type, class: 'mt-4', local: true do |f| %>
   <div class="form-group">
     <%= f.label :name, 'Nome' %>
     <%= f.text_field :name, class: 'form-control col-md-6' %>

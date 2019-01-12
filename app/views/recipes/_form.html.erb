@@ -2,7 +2,7 @@
   <p>Você deve informar todos os dados da receita</p>
 <% end %>
 
-<%= form_with model: recipe, class: 'mt-4' do |f| %>
+<%= form_with model: recipe, class: 'mt-4', local: true do |f| %>
   <div class="form-group">
     <%= f.label :title, 'Título' %>
     <%= f.text_field :title, class: 'form-control col-md-6' %>

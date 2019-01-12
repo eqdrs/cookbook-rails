@@ -1,0 +1,10 @@
+<h1><%= "Resultados da busca para: #{@keyword}"%></h1>
+<h2><%= @results.length %> receita(s) encontrada(s)</h2>
+
+<% if @results.any? %>
+  <div class="row">
+    <%= render partial: 'recipe', collection: @results %>
+  </div>
+<% else %>
+  <h4> Nenhuma receita encontrada. <h4>
+<% end %>

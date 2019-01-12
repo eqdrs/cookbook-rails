@@ -4,6 +4,11 @@ class RecipesController < ApplicationController
     @recipes = Recipe.all
   end
 
+  def search
+    @results = Recipe.where("title LIKE ?", "%#{params[:keyword]}%")
+    @keyword = params[:keyword]
+  end
+
   def show; end
 
   def new
