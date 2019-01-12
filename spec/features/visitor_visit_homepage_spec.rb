@@ -10,13 +10,15 @@ feature 'Visitor visit homepage' do
 
   scenario 'and view recipe' do
     #cria os dados necessários
+    user = User.create!(email: 'teste@gmail.com', password: '123456')
     recipe_type = RecipeType.create(name: 'Sobremesa')
     cuisine = Cuisine.create(name: 'Brasileira')
     recipe = Recipe.create(title: 'Bolo de cenoura', difficulty: 'Médio',
                            recipe_type: recipe_type, cuisine: cuisine,
                            cook_time: 50,
                            ingredients: 'Farinha, açucar, cenoura',
-                           cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
+                           cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes',
+                           user: user)
 
     # simula a ação do usuário
     visit root_path
@@ -31,6 +33,7 @@ feature 'Visitor visit homepage' do
 
   scenario 'and view recipes list' do
     #cria os dados necessários
+    user = User.create!(email: 'teste@gmail.com', password: '123456')
     recipe_type = RecipeType.create(name: 'Sobremesa')
     cuisine = Cuisine.create(name: 'Brasileira')
     another_recipe_type = RecipeType.create(name: 'Prato principal')
@@ -38,14 +41,16 @@ feature 'Visitor visit homepage' do
                            recipe_type: recipe_type, cuisine: cuisine,
                            cook_time: 50,
                            ingredients: 'Farinha, açucar, cenoura',
-                           cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
+                           cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes',
+                           user: user)
 
     another_recipe = Recipe.create(title: 'Feijoada',
                                    recipe_type: another_recipe_type,
                                    cuisine: cuisine, difficulty: 'Difícil',
                                    cook_time: 90,
                                    ingredients: 'Feijão e carnes',
-                                   cook_method: 'Misture o feijão com as carnes')
+                                   cook_method: 'Misture o feijão com as carnes',
+                                   user: user)
 
     # simula a ação do usuário
     visit root_path
@@ -72,43 +77,51 @@ feature 'Visitor visit homepage' do
   end
 
   scenario 'and view six last recipes' do
+    user = User.create!(email: 'teste@gmail.com', password: '123456')
     recipe_type = RecipeType.create(name: 'Sobremesa')
     cuisine = Cuisine.create(name: 'Brasileira')
     carrot_cake = Recipe.create(title: 'Bolo de cenoura', recipe_type: recipe_type,
                            cuisine: cuisine, difficulty: 'Médio',
                            cook_time: 60,
                            ingredients: 'Farinha, açucar, cenoura',
-                           cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
+                           cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes',
+                           user: user)
     orange_cake = Recipe.create(title: 'Bolo de laranja', recipe_type: recipe_type,
                            cuisine: cuisine, difficulty: 'Médio',
                            cook_time: 60,
                            ingredients: 'Farinha, laranjas, açúcar',
-                           cook_method: 'Misture e coloque no forno.')
+                           cook_method: 'Misture e coloque no forno.',
+                           user: user)
     strawberry_cake = Recipe.create(title: 'Bolo de morango', recipe_type: recipe_type,
                            cuisine: cuisine, difficulty: 'Médio',
                            cook_time: 60,
                            ingredients: 'Farinha, morangos, açúcar',
-                           cook_method: 'Misture e coloque no forno.')
+                           cook_method: 'Misture e coloque no forno.',
+                           user: user)
     blueberry_cake = Recipe.create(title: 'Bolo de mirtilo', recipe_type: recipe_type,
                            cuisine: cuisine, difficulty: 'Médio',
                            cook_time: 60,
                            ingredients: 'Farinha, mirtilo, açúcar',
-                           cook_method: 'Misture e coloque no forno.')
+                           cook_method: 'Misture e coloque no forno.',
+                           user: user)
     chocolate_cake = Recipe.create(title: 'Bolo de chocolate', recipe_type: recipe_type,
                            cuisine: cuisine, difficulty: 'Médio',
                            cook_time: 60,
                            ingredients: 'Farinha, chocolate, açúcar',
-                           cook_method: 'Misture e coloque no forno.')
+                           cook_method: 'Misture e coloque no forno.',
+                           user: user)
     corn_cake = Recipe.create(title: 'Bolo de milho', recipe_type: recipe_type,
                            cuisine: cuisine, difficulty: 'Médio',
                            cook_time: 60,
                            ingredients: 'Farinha, milho, açúcar',
-                           cook_method: 'Misture e coloque no forno.')
+                           cook_method: 'Misture e coloque no forno.',
+                           user: user)
     banana_cake = Recipe.create(title: 'Bolo de banana', recipe_type: recipe_type,
                            cuisine: cuisine, difficulty: 'Médio',
                            cook_time: 60,
                            ingredients: 'Farinha, banana, açúcar',
-                           cook_method: 'Misture e coloque no forno.')
+                           cook_method: 'Misture e coloque no forno.',
+                           user: user)
 
     visit root_path
 

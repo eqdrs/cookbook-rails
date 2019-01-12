@@ -2,14 +2,16 @@ require 'rails_helper'
 
 feature 'User update recipe' do
   scenario 'successfully' do
-    recipe_type = RecipeType.create(name: 'Sobremesa')
-    RecipeType.create(name: 'Entrada')
-    cuisine = Cuisine.create(name: 'Brasileira')
-    Cuisine.create(name: 'Arabe')
-    Recipe.create(title: 'Bolodecenoura', difficulty: 'Médio',
+    user = User.create!(email: 'teste@gmail.com', password: '123456')
+    recipe_type = RecipeType.create!(name: 'Sobremesa')
+    RecipeType.create!(name: 'Entrada')
+    cuisine = Cuisine.create!(name: 'Brasileira')
+    Cuisine.create!(name: 'Arabe')
+    Recipe.create!(title: 'Bolodecenoura', difficulty: 'Médio',
                   recipe_type: recipe_type, cuisine: cuisine,
                   cook_time: 50, ingredients: 'Farinha, açucar, cenoura',
-                  cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
+                  cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes',
+                  user: user)
 
     # simula a ação do usuário
     visit root_path
@@ -36,15 +38,19 @@ feature 'User update recipe' do
     expect(page).to have_css('p', text: '45 minutos')
     expect(page).to have_css('p', text:  'Cenoura, farinha, ovo, oleo de soja e chocolate')
     expect(page).to have_css('p', text: 'Faça um bolo e uma cobertura de chocolate')
+    expect(page).to have_css('h3', text: 'Autor')
+    expect(page).to have_css('p', text: user.email)
   end
 
   scenario 'and must fill in all fields' do
+    user = User.create!(email: 'teste@gmail.com', password: '123456')
     recipe_type = RecipeType.create(name: 'Sobremesa')
     cuisine = Cuisine.create(name: 'Brasileira')
     Recipe.create(title: 'Bolodecenoura', difficulty: 'Médio',
                   recipe_type: recipe_type, cuisine: cuisine,
                   cook_time: 50, ingredients: 'Farinha, açucar, cenoura',
-                  cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
+                  cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes',
+                  user: user)
 
     # simula a ação do usuário
     visit root_path

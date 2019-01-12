@@ -2,13 +2,15 @@ require 'rails_helper'
 
 feature 'User filter recipe' do
   scenario 'succesfully' do
+    user = User.create!(email: 'teste@gmail.com', password: '123456')
     dessert = RecipeType.create(name: 'Sobremesa')
     cuisine = Cuisine.create(name: 'Brasileira')
     cake = Recipe.create(title: 'Bolo de cenoura', recipe_type: dessert,
                            cuisine: cuisine, difficulty: 'Médio',
                            cook_time: 60,
                            ingredients: 'Farinha, açucar, cenoura',
-                           cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
+                           cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes',
+                           user: user)
 
     visit root_path
     click_on 'Sobremesa'
@@ -33,6 +35,7 @@ feature 'User filter recipe' do
   end
 
   scenario 'and finds only one recipe' do
+    user = User.create!(email: 'teste@gmail.com', password: '123456')
     dessert = RecipeType.create(name: 'Sobremesa')
     main_dish = RecipeType.create(name: 'Prato principal')
     cuisine = Cuisine.create(name: 'Brasileira')
@@ -40,12 +43,14 @@ feature 'User filter recipe' do
                            cuisine: cuisine, difficulty: 'Médio',
                            cook_time: 60,
                            ingredients: 'Macarrão, água, sal e óleo',
-                           cook_method: 'Coloque o macarrão na água, com óleo, sal e então ferva.')
+                           cook_method: 'Coloque o macarrão na água, com óleo, sal e então ferva.',
+                           user: user)
     cake = Recipe.create(title: 'Bolo de cenoura', recipe_type: dessert,
                            cuisine: cuisine, difficulty: 'Médio',
                            cook_time: 60,
                            ingredients: 'Farinha, açucar, cenoura',
-                           cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
+                           cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes',
+                           user: user)
 
     visit root_path
     click_on 'Sobremesa'
