@@ -14,6 +14,9 @@
     <div class="main">
       <!-- flashes goes here -->
       <div class="container">
+        <% flash.each do |name, msg| %>
+          <%= msg %>
+        <% end %> 
         <%= yield %>
       </div>
     </div>
