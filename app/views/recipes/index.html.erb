@@ -3,14 +3,24 @@
   <p class="lead">Bem-vindo ao maior livro de receitas online</p>
 </section>
 
-<h3 class="text-center mb-4">Receitas</h3>
-
-<% if @recipes.any? %>
-  <div class="row">
-    <%= render partial: 'recipe', collection: @recipes %>
+<div class="row">
+  <div class="col-md-9">
+    <h3 class="text-center mb-4">Receitas</h3>
+    <% if @recipes.any? %>
+      <div class="row">
+        <%= render @recipes %>
+      </div>
+    <% else %>
+      <p class="text-center">
+        Ainda não temos nenhuma receita. Que tal enviar uma?
+      </p>
+    <% end %>
   </div>
-<% else %>
-  <p class="text-center">
-    Ainda não temos nenhuma receita. Que tal enviar uma?
-  </p>
-<% end %>
+
+  <div class="col-md-3">
+    <h3 class="text-center mb-4 col-md-3">Tipos de receita</h3>
+    <% @recipe_types.each do |recipe_type| %>
+      <li><%= link_to recipe_type.name, recipe_type %></li>
+    <% end %>
+  </div>
+</div>

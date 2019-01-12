@@ -2,6 +2,7 @@ class RecipesController < ApplicationController
   before_action :set_recipe, only: %i[show edit update]
   def index
     @recipes = Recipe.all
+    @recipe_types = RecipeType.all
   end
 
   def search
