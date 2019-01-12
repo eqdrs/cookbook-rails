@@ -11,6 +11,9 @@
 <h3>Autor</h3>
 <p><%= @recipe.user.email %></p>
 
-<%= link_to 'Editar', edit_recipe_path(@recipe), class: 'btn btn-primary' %>
+<% if user_signed_in? && @recipe.user.email == current_user.email %>
+  <%= link_to 'Editar', edit_recipe_path(@recipe), class: 'btn btn-primary' %>
+  <%= link_to 'Apagar', @recipe, method: :delete, class: 'btn btn-primary' %>
+<% end %>
+
 <%= link_to 'Voltar', root_path, class: 'btn btn-secondary' %>
-<%= link_to 'Apagar', @recipe, method: :delete, class: 'btn btn-primary' %>

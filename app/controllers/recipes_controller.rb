@@ -1,6 +1,7 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: %i[show edit update]
-  before_action :authenticate_user!, only: %i[new create]
+  before_action :authenticate_user!, only: %i[new create edit update destroy]
+  before_action :verify_author, only: %i[edit update destroy]
 
   def index
     @recipes = Recipe.all
@@ -58,6 +59,13 @@ class RecipesController < ApplicationController
 
   def set_recipe
     @recipe = Recipe.find(params[:id])
+  end
+
+  def verify_author
+    @recipe = Recipe.find(params[:id])
+    if @recipe.user.email != current_user.email
+      redirect_to root_path
+    end
   end
 
   def recipe_params
