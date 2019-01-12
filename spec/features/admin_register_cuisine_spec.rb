@@ -18,4 +18,14 @@ feature 'Admin register cuisine' do
 
     expect(page).to have_content('Você deve informar o nome da cozinha')
   end
+
+  scenario 'and must be unique' do
+    cuisine = Cuisine.create(name: 'Brasileira')
+    
+    visit new_cuisine_path
+    fill_in 'Nome', with: 'BRASILEIRA'
+    click_on 'Enviar'
+
+    expect(page).to have_content('Esta cozinha já existe!')
+  end
 end

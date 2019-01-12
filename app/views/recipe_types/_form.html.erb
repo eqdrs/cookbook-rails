@@ -1,6 +1,6 @@
-<% if recipe_type.errors.any? %>
-  <p>Você deve informar o nome do tipo de receita</p>
-<% end %>
+  <% @recipe_type.errors.full_messages.each do |msg| %>
+    <p><%= msg %></p>
+  <% end %>
 
 <%= form_with model: recipe_type, class: 'mt-4', local: true do |f| %>
   <div class="form-group">

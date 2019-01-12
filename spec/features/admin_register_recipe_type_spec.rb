@@ -17,4 +17,14 @@ feature 'Admin register recipe_type' do
 
     expect(page).to have_content('Você deve informar o nome do tipo de receita')
   end
+
+  scenario 'and must be unique' do
+    recipe_type = RecipeType.create(name: 'Sobremesa')
+    
+    visit new_recipe_type_path
+    fill_in 'Nome', with: 'SOBREMESA'
+    click_on 'Enviar'
+
+    expect(page).to have_content('Este tipo de receita já existe!')
+  end
 end
