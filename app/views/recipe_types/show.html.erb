@@ -2,6 +2,7 @@
 
 <% if @recipe_type.recipes.any? %>
   <h3><%= @recipe_type.recipes.length %> receita(s) nesta categoria</h3>
+  <hr class="my-4">
   <div class="row">
     <%= render @recipe_type.recipes %>
   </div>

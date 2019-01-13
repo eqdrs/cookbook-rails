@@ -1,19 +1,24 @@
-<h1><%= @recipe.title %></h1>
+<h1 class="display-4"><%= @recipe.title %></h1>
+<hr class="my-4">
 <h3>Detalhes</h3>
 <p><%= @recipe.recipe_type.name %></p>
 <p><%= @recipe.cuisine.name %></p>
 <p><%= @recipe.difficulty %></p>
 <p><%= @recipe.cook_time_min %></p>
+<hr class="my-4">
 <h3>Ingredientes</h3>
 <p><%= @recipe.ingredients %></p>
+<hr class="my-4">
 <h3>Como Preparar</h3>
 <p><%= @recipe.cook_method %></p>
+<hr class="my-4">
 <h3>Autor</h3>
 <p><%= @recipe.user.email %></p>
+<hr class="my-4">
 
 <% if user_signed_in? && @recipe.user.email == current_user.email %>
   <%= link_to 'Editar', edit_recipe_path(@recipe), class: 'btn btn-primary' %>
   <%= link_to 'Apagar', @recipe, method: :delete, class: 'btn btn-primary' %>
 <% end %>
-
 <%= link_to 'Voltar', root_path, class: 'btn btn-secondary' %>
+

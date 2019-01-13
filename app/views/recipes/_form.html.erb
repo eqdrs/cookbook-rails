@@ -1,5 +1,10 @@
 <% if recipe.errors.any? %>
-  <p>Você deve informar todos os dados da receita</p>
+  <p class="alert alert-warning alert-dismissible fade show">
+    Você deve informar todos os dados da receita
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </p>
 <% end %>
 
 <%= form_with model: recipe, class: 'mt-4', local: true do |f| %>
