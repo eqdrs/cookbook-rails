@@ -23,7 +23,7 @@ feature 'User sign up' do
     click_on 'Entrar'
     fill_in 'Email', with: user.email
     fill_in 'Senha', with: '123456'
-    within("form#new_user") do
+    within('form#new_user') do
       click_on 'Entrar'
     end
 
@@ -41,7 +41,7 @@ feature 'User sign up' do
     click_on 'Entrar'
     fill_in 'Email', with: user.email
     fill_in 'Senha', with: '123456'
-    within("form#new_user") do
+    within('form#new_user') do
       click_on 'Entrar'
     end
     click_on 'Sair'

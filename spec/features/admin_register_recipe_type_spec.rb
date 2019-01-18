@@ -19,8 +19,8 @@ feature 'Admin register recipe_type' do
   end
 
   scenario 'and must be unique' do
-    recipe_type = RecipeType.create(name: 'Sobremesa')
-    
+    RecipeType.create(name: 'Sobremesa')
+
     visit new_recipe_type_path
     fill_in 'Nome', with: 'SOBREMESA'
     click_on 'Enviar'

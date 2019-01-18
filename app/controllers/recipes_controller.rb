@@ -9,7 +9,7 @@ class RecipesController < ApplicationController
   end
 
   def search
-    @results = Recipe.where("title LIKE ?", "%#{params[:keyword]}%")
+    @results = Recipe.where('title LIKE ?', "%#{params[:keyword]}%")
     @keyword = params[:keyword]
   end
 
@@ -49,10 +49,9 @@ class RecipesController < ApplicationController
   end
 
   def destroy
-  @recipe = Recipe.find(params[:id])
-  @recipe.destroy
-
-  redirect_to root_path, notice: "Receita apagada com sucesso!"
+    @recipe = Recipe.find(params[:id])
+    @recipe.destroy
+    redirect_to root_path, notice: 'Receita apagada com sucesso!'
   end
 
   private
@@ -63,9 +62,7 @@ class RecipesController < ApplicationController
 
   def verify_author
     @recipe = Recipe.find(params[:id])
-    if @recipe.user.email != current_user.email
-      redirect_to root_path
-    end
+    @recipe.user.email != current_user.email && (redirect_to root_path)
   end
 
   def recipe_params
