@@ -2,23 +2,8 @@ require 'rails_helper'
 
 feature 'Visitor search recipe' do
   scenario 'and find only one recipe' do
-    user = User.create!(email: 'teste@gmail.com', password: '123456')
-    recipe_type = RecipeType.create(name: 'Sobremesa')
-    cuisine = Cuisine.create(name: 'Brasileira')
-    cake = Recipe.create!(title: 'Bolo de cenoura', recipe_type: recipe_type,
-                          cuisine: cuisine, difficulty: 'Médio',
-                          cook_time: 60,
-                          ingredients: 'Farinha, açucar, cenoura',
-                          cook_method: 'Cozinhe a cenoura, corte em pedaços \
-                                        pequenos, misture com o restante dos \
-                                        ingredientes',
-                          user: user)
-    pudding = Recipe.create!(title: 'Pudim', recipe_type: recipe_type,
-                             cuisine: cuisine, difficulty: 'Fácil',
-                             cook_time: 60,
-                             ingredients: 'Leite condensado, açúcar',
-                             cook_method: 'Misture e coloque no forno.',
-                             user: user)
+    cake = create(:recipe, title: 'Bolo de cenoura')
+    pudding = create(:recipe, title: 'Pudim')
 
     visit root_path
     fill_in 'Busca', with: 'Pudim'
@@ -45,25 +30,8 @@ feature 'Visitor search recipe' do
   end
 
   scenario 'and finds more the one recipe' do
-    user = User.create!(email: 'teste@gmail.com', password: '123456')
-    recipe_type = RecipeType.create(name: 'Sobremesa')
-    cuisine = Cuisine.create(name: 'Brasileira')
-    carrot_cake = Recipe.create!(title: 'Bolo de cenoura',
-                                 recipe_type: recipe_type,
-                                 cuisine: cuisine, difficulty: 'Médio',
-                                 cook_time: 60,
-                                 ingredients: 'Farinha, açucar, cenoura',
-                                 cook_method: 'Cozinhe a cenoura, corte em \
-                                              pedaços pequenos, misture com o \
-                                              restante dos ingredientes',
-                                 user: user)
-    orange_cake = Recipe.create!(title: 'Bolo de laranja',
-                                 recipe_type: recipe_type,
-                                 cuisine: cuisine, difficulty: 'Médio',
-                                 cook_time: 60,
-                                 ingredients: 'Farinha, laranjas, açúcar',
-                                 cook_method: 'Misture e coloque no forno.',
-                                 user: user)
+    carrot_cake = create(:recipe, title: 'Bolo de cenoura')
+    orange_cake = create(:recipe, title: 'Bolo de laranja')
 
     visit root_path
     fill_in 'Busca', with: 'Bolo'

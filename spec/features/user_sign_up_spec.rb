@@ -17,12 +17,12 @@ feature 'User sign up' do
   end
 
   scenario 'and can login' do
-    user = User.create!(email: 'teste@gmail.com', password: '123456')
+    user = create(:user)
 
     visit root_path
     click_on 'Entrar'
     fill_in 'Email', with: user.email
-    fill_in 'Senha', with: '123456'
+    fill_in 'Senha', with: '12345678'
     within('form#new_user') do
       click_on 'Entrar'
     end
@@ -30,20 +30,14 @@ feature 'User sign up' do
     expect(current_path).to eq root_path
     expect(page).not_to have_link('Criar conta')
     expect(page).not_to have_link('Entrar')
-    expect(page).to have_content('Olá, teste@gmail.com')
+    expect(page).to have_content("Olá, #{user.email}")
     expect(page).to have_link('Sair')
   end
 
   scenario 'and can logout' do
-    user = User.create!(email: 'teste@gmail.com', password: '123456')
+    login_user
 
     visit root_path
-    click_on 'Entrar'
-    fill_in 'Email', with: user.email
-    fill_in 'Senha', with: '123456'
-    within('form#new_user') do
-      click_on 'Entrar'
-    end
     click_on 'Sair'
 
     expect(current_path).to eq root_path

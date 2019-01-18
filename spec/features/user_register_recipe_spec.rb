@@ -2,18 +2,12 @@ require 'rails_helper'
 
 feature 'User register recipe' do
   scenario 'successfully' do
-    user = User.create!(email: 'teste@gmail.com', password: '123456')
-    RecipeType.create(name: 'Sobremesa')
-    RecipeType.create(name: 'Entrada')
-    Cuisine.create(name: 'Arabe')
+    user = login_user
+    create(:recipe_type, name: 'Sobremesa')
+    create(:recipe_type, name: 'Entrada')
+    create(:cuisine, name: 'Arabe')
 
     visit root_path
-    click_on 'Entrar'
-    fill_in 'Email', with: user.email
-    fill_in 'Senha', with: '123456'
-    within('form#new_user') do
-      click_on 'Entrar'
-    end
     click_on 'Enviar uma receita'
 
     fill_in 'Título', with: 'Tabule'
@@ -44,16 +38,8 @@ feature 'User register recipe' do
   end
 
   scenario 'and must fill in all fields' do
-    user = User.create!(email: 'teste@gmail.com', password: '123456')
-
-    visit root_path
-    click_on 'Entrar'
-    fill_in 'Email', with: user.email
-    fill_in 'Senha', with: '123456'
-    within('form#new_user') do
-      click_on 'Entrar'
-    end
-    click_on 'Enviar uma receita'
+    login_user
+    visit new_recipe_path
 
     fill_in 'Título', with: ''
     fill_in 'Dificuldade', with: ''
