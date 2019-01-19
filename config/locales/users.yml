@@ -1,0 +1,10 @@
+'pt-BR':
+  activerecord:
+    attributes:
+      user:
+        email: Email
+        password: Senha
+    models:
+      user:
+        one: Usuário
+        other: Usuários

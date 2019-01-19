@@ -7,7 +7,7 @@ feature 'User sign up' do
     fill_in 'Email', with: 'teste@gmail.com'
     fill_in 'Senha', with: '123456'
     fill_in 'Confirme sua senha', with: '123456'
-    click_on 'Cadastrar'
+    click_on 'Inscrever-se'
 
     expect(current_path).to eq root_path
     expect(page).not_to have_link('Criar conta')

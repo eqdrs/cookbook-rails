@@ -1,0 +1,20 @@
+'pt-BR':
+  activerecord:
+    errors:
+      models:
+        cuisine:
+          attributes:
+            name:
+              blank: Você deve informar o nome da cozinha
+              taken: Esta cozinha já existe!
+    attributes:
+      cuisine:
+        name: Nome
+    models:
+      cuisine:
+        one: Cozinha
+        other: Cozinhas
+  cuisines:
+    new:
+      title: Cadastro de cozinha
+      submit: Enviar

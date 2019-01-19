@@ -1,0 +1,21 @@
+'pt-BR':
+  activerecord:
+    errors:
+      models:
+        recipe_type:
+          attributes:
+            name:
+              blank: Você deve informar o nome do tipo de receita
+              taken: Este tipo de receita já existe!
+    attributes:
+      recipe_type:
+        name: Nome
+    models:
+      recipe_type:
+        one: Tipo de Receita
+        other: Tipos de Receita
+  recipe_types:
+    form:
+      title: Cadastro de tipo de receita
+      submit: Enviar
+      blank: Você deve informar o nome da receita

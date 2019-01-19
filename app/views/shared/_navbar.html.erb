@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <%= link_to 'Cookbook', root_path, class: 'navbar-brand' %>
+  <%= link_to t('.title'), root_path, class: 'navbar-brand' %>
   
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -8,25 +8,25 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <%= link_to 'Home', root_path, class: 'nav-link' %>
+        <%= link_to t('.home'), root_path, class: 'nav-link' %>
       </li>
       <% if user_signed_in? %>
         <li class="nav-item">
-          <%= link_to 'Enviar uma receita', new_recipe_path, class: 'nav-link' %>
+          <%= link_to t('.register_recipe'), new_recipe_path, class: 'nav-link' %>
         </li>
       <% end %>
       <li class="nav-item">
-        <%= link_to 'Cadastrar tipo de receita', new_recipe_type_path, class: 'nav-link' %>
+        <%= link_to t('.register_recipe_type'), new_recipe_type_path, class: 'nav-link' %>
       </li>
       <li class="nav-item">
-        <%= link_to 'Cadastrar cozinha', new_cuisine_path, class: 'nav-link' %>
+        <%= link_to t('.register_cuisine'), new_cuisine_path, class: 'nav-link' %>
       </li>
       <% if user_signed_in? %>
         <li class="nav-item">
-          <%= link_to 'Sair', destroy_user_session_path, method: :delete, class: 'nav-link' %>
+          <%= link_to t('.sign_out'), destroy_user_session_path, method: :delete, class: 'nav-link' %>
         </li>
         <li class="nav-item nav-link">
-          <%= "Olá, #{current_user.email}" %>
+          <%= t('.hello', email: current_user.email) %>
         </li>
       <% else %>
         <li class="nav-item">
@@ -39,9 +39,9 @@
     </ul>
 
     <%= form_tag "/search", method: "get", class: "form-inline my-2 my-lg-0" do %>
-      <%= label_tag :keyword, "Busca" %>
-      <%= text_field_tag :keyword, nil, class: "ml-2 form-control mr-sm-2", placeholder: "Buscar" %>
-      <%= submit_tag "Buscar", class: "btn btn-outline-success my-2 my-sm-0" %>
+      <%= label_tag :keyword, t('.search_label') %>
+      <%= text_field_tag :keyword, nil, class: "ml-2 form-control mr-sm-2", placeholder: t('.type') %>
+      <%= submit_tag t('.search_button'), class: "btn btn-outline-success my-2 my-sm-0" %>
     <% end %>
   </div>
 </nav>

@@ -1,0 +1,27 @@
+'pt-BR':
+  activerecord:
+    attributes:
+      recipe:
+        title: Título
+        recipe_type_id: Tipo da Receita
+        cuisine_id: Cozinha
+        difficulty: Dificuldade
+        cook_time: Tempo de Preparo
+        ingredients: Ingredientes
+        cook_method: Como Preparar
+    models:
+      recipe:
+        one: Receita
+        other: Receitas
+  recipes:
+    form:
+      title: Cadastro de receita
+      submit: Enviar
+      blank: Você deve informar todos os dados da receita
+    index:
+      title: CookBook
+      subtitle: Bem-vindo ao maior livro de receitas online
+      recipes: Receitas
+      last_recipes: Últimas receitas
+      recipe_types: Tipos de receita
+      no_recipes: Ainda não temos nenhuma receita. Que tal enviar uma?

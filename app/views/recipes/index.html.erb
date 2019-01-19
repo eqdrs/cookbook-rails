@@ -1,30 +1,34 @@
 <section class="jumbotron text-center">
-  <h1>CookBook</h1>
-  <p class="lead">Bem-vindo ao maior livro de receitas online</p>
+  <h1><%= t('.title') %></h1>
+  <p class="lead"><%= t('.subtitle') %></p>
 </section>
 
 <div class="row">
   <div class="col-md-9">
 
     <section id="all-recipes">
-      <h3 class="text-center mb-4">Receitas</h3>
+      <h3 class="text-center mb-4"><%= t('.recipes') %></h3>
       <% if @recipes.any? %>
         <div class="row">
           <%= render @recipes %>
         </div>
       <% else %>
         <p class="text-center">
-          Ainda não temos nenhuma receita. Que tal enviar uma?
+          <%= t('.no_recipes') %>
         </p>
       <% end %>
     </section>
 
     <section id="last-recipes">
       <% if @recipes.any? %>
-        <h3 class="text-center mb-4">Últimas receitas</h3>
+        <h3 class="text-center mb-4"><%= t('.last_recipes') %></h3>
         <div class="row">
           <%= render @recipes.last(6) %>
         </div>
+      <% else %>
+        <p class="text-center">
+          <%= t('.no_recipes') %>
+        </p>
       <% end %>
     </section>
   </div>
