@@ -12,3 +12,6 @@
   users:
     edit:
       submit: Salvar alterações
+    my_lists:
+      title: Minhas listas de receitas
+      

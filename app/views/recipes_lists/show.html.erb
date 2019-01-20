@@ -1,0 +1,6 @@
+<h2 class="mt-4"><%= t('.title', name: @recipes_list.name) %></h2>
+<h5><%= t('.created_by', email: @recipes_list.user.email) %></h5>
+<hr class="my-4">
+<div class="row">
+  <%= render @recipes_list.recipes %> 
+</div>

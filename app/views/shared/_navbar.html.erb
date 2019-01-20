@@ -22,11 +22,15 @@
         <%= link_to t('.register_cuisine'), new_cuisine_path, class: 'nav-link' %>
       </li>
       <% if user_signed_in? %>
+        <li class="nav-item">
+          <%= link_to 'Criar lista', new_recipes_list_path, class: 'nav-link' %>
+        </li>
         <div class="dropdown nav-item">
           <a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">
             <%= t('.hello', email: current_user.email) %>
           </a>
           <div class="dropdown-menu">
+            <%= link_to t('.my_recipes_lists'), user_lists_path(current_user), class: 'dropdown-item' %>
             <%= link_to t('.edit_profile'), edit_user_path(current_user), class: 'dropdown-item' %>
             <%= link_to t('.sign_out'), destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
           </div>

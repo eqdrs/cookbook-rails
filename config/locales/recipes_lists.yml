@@ -1,0 +1,25 @@
+'pt-BR':
+  activerecord:
+    errors:
+      models:
+        recipes_list:
+          attributes:
+            name:
+              blank: Você deve informar o nome da lista
+            recipes:
+              blank: Você deve selecionar ao menos uma receita
+    attributes:
+      recipes_list:
+        name: Nome
+        recipe_ids: Receitas
+    models:
+      recipes_list:
+        one: Lista de receita
+        other: Lista de receitas
+  recipes_lists:
+    new:
+      title: Criar lista de receitas
+      submit: Criar lista
+    show:
+      title: Lista de receitas "%{name}"
+      created_by: 'Criada por: %{email}'

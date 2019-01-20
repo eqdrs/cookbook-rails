@@ -9,17 +9,18 @@ class UsersController < ApplicationController
   def edit; end
 
   def update
-    if current_user.update(params.require(:user).permit(:photo))
-      redirect_to current_user
-    end
+    redirect_to current_user if current_user.update(params.require(:user)
+                                                    .permit(:photo))
+  end
+
+  def my_lists
+    @lists = current_user.recipes_lists
   end
 
   private
 
   def verify_current_user
     @user = User.find(params[:id])
-    if @user != current_user
-      redirect_to edit_user_path(current_user)
-    end
+    (@user != current_user) && (redirect_to edit_user_path(current_user))
   end
 end
