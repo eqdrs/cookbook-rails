@@ -15,6 +15,13 @@
 <h3>Autor</h3>
 <p><%= @recipe.user.email %></p>
 <hr class="my-4">
+<h3>Imagens</h3>
+<% if @recipe.photo.attached? %>
+  <%= image_tag @recipe.photo, {width: 500} %>
+<% else %>
+  <%= image_tag "noimage.jpg" %>
+<% end %>
+<hr class="my-4">
 
 <% if user_signed_in? && @recipe.author?(current_user) %>
   <%= link_to 'Editar', edit_recipe_path(@recipe), class: 'btn btn-primary' %>

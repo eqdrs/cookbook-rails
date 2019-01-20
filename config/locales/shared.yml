@@ -3,7 +3,7 @@
     navbar:
       title: CookBook
       home: Home
-      register_recipe: Enviar uma receita
+      register_recipe: Enviar receita
       register_recipe_type: Cadastrar tipo de receita
       register_cuisine: Cadastrar cozinha
       sign_out: Sair

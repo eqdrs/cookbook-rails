@@ -20,8 +20,8 @@
     </section>
 
     <section id="last-recipes">
+      <h3 class="text-center mb-4 mt-4"><%= t('.last_recipes') %></h3>
       <% if @recipes.any? %>
-        <h3 class="text-center mb-4"><%= t('.last_recipes') %></h3>
         <div class="row">
           <%= render @recipes.last(6) %>
         </div>
@@ -34,7 +34,7 @@
   </div>
 
   <div class="col-md-3">
-    <h3 class="text-center mb-4">Tipos de receita</h3>
+    <h3 class="text-center mb-4"><%= t('.recipe_types') %></h3>
     <ul class="list-group">
       <% @recipe_types.each do |recipe_type| %>
         <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
