@@ -1,0 +1,6 @@
+<h3><%= user.email %></h3>
+<% if user.photo.attached? %>
+  <%= image_tag user.photo, {width: 200} %>
+<% else %>
+  <%= image_tag 'profile_placeholder.jpg', {width: 200} %>
+<% end %>

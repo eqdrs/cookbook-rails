@@ -1,21 +1,21 @@
 <h1 class="display-4"><%= @recipe.title %></h1>
 <hr class="my-4">
-<h3>Detalhes</h3>
+<h3><%= t('.details') %></h3>
 <p><%= @recipe.recipe_type.name %></p>
 <p><%= @recipe.cuisine.name %></p>
 <p><%= @recipe.difficulty %></p>
 <p><%= @recipe.cook_time_min %></p>
 <hr class="my-4">
-<h3>Ingredientes</h3>
+<h3><%= t('.ingredients') %></h3>
 <p><%= @recipe.ingredients %></p>
 <hr class="my-4">
-<h3>Como Preparar</h3>
+<h3><%= t('.cook_method') %></h3>
 <p><%= @recipe.cook_method %></p>
 <hr class="my-4">
-<h3>Autor</h3>
+<h3><%= t('.author') %></h3>
 <p><%= @recipe.user.email %></p>
 <hr class="my-4">
-<h3>Imagens</h3>
+<h3><%= t('.images') %></h3>
 <% if @recipe.photo.attached? %>
   <%= image_tag @recipe.photo, {width: 500} %>
 <% else %>
@@ -23,9 +23,11 @@
 <% end %>
 <hr class="my-4">
 
-<% if user_signed_in? && @recipe.author?(current_user) %>
-  <%= link_to 'Editar', edit_recipe_path(@recipe), class: 'btn btn-primary' %>
-  <%= link_to 'Apagar', @recipe, method: :delete, class: 'btn btn-primary' %>
-<% end %>
-<%= link_to 'Voltar', root_path, class: 'btn btn-secondary' %>
+<section id='buttons'>
+  <% if user_signed_in? && @recipe.author?(current_user) %>
+    <%= link_to t('.edit'), edit_recipe_path(@recipe), class: 'btn btn-primary' %>
+    <%= link_to t('.delete'), @recipe, method: :delete, class: 'btn btn-primary' %>
+  <% end %>
+  <%= link_to t('.back'), root_path, class: 'btn btn-secondary' %>
+</section>
 

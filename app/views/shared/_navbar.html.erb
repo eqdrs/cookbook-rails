@@ -27,6 +27,7 @@
             <%= t('.hello', email: current_user.email) %>
           </a>
           <div class="dropdown-menu">
+            <%= link_to t('.edit_profile'), edit_user_path(current_user), class: 'dropdown-item' %>
             <%= link_to t('.sign_out'), destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
           </div>
         </div>

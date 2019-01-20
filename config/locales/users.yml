@@ -4,7 +4,11 @@
       user:
         email: Email
         password: Senha
+        photo: Foto
     models:
       user:
         one: Usuário
         other: Usuários
+  users:
+    edit:
+      submit: Salvar alterações

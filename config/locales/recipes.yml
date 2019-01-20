@@ -25,3 +25,12 @@
       last_recipes: Últimas receitas
       recipe_types: Tipos de receita
       no_recipes: Ainda não temos nenhuma receita. Que tal enviar uma?
+    show:
+      details: Detalhes
+      ingredients: Ingredientes
+      cook_method: Como Preparar
+      author: Autor
+      images: Imagens
+      edit: Editar
+      delete: Apagar
+      back: Voltar

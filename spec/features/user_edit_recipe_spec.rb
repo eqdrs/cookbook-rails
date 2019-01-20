@@ -91,6 +91,8 @@ feature 'User update recipe' do
     login_as(user, scope: :user)
     visit recipe_path(recipe)
 
-    expect(page).not_to have_link('Editar')
+    within('section#buttons') do
+      expect(page).not_to have_link('Editar')
+    end
   end
 end
