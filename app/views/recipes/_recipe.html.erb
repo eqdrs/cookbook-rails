@@ -3,6 +3,9 @@
     <%= image_tag 'https://via.placeholder.com/500x255', class: 'card-img-top' %>
     <div class="card-body">
       <h1 class="h4">
+        <% if recipe.highlight %>
+          <%= image_tag 'star.png', {width: 25} %>
+        <% end %>
         <%= link_to recipe.title, recipe %>
       </h1>
       <ul>

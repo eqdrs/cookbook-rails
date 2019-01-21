@@ -1,4 +1,12 @@
-<h1 class="display-4"><%= @recipe.title %></h1>
+<div class="row">  
+  <% if @recipe.highlight %>
+    <div class="col-md-1 mt-3">
+      <%= image_tag 'star.png', {width: 60} %>
+    </div>
+  <% end %>
+  <h1 class="display-4 mt-3"><%= @recipe.title %></h1>
+</div>
+
 <hr class="my-4">
 <h3><%= t('.details') %></h3>
 <p><%= @recipe.recipe_type.name %></p>
@@ -13,7 +21,7 @@
 <p><%= @recipe.cook_method %></p>
 <hr class="my-4">
 <h3><%= t('.author') %></h3>
-<p><%= link_to @recipe.user.email, @recipe.user %></p>
+<p><%= link_to @recipe.user.name, @recipe.user %></p>
 <hr class="my-4">
 <h3><%= t('.images') %></h3>
 <% if @recipe.photo.attached? %>
@@ -24,10 +32,21 @@
 <hr class="my-4">
 
 <section id='buttons'>
-  <% if user_signed_in? && @recipe.author?(current_user) %>
-    <%= link_to t('.edit'), edit_recipe_path(@recipe), class: 'btn btn-primary' %>
-    <%= link_to t('.delete'), @recipe, method: :delete, class: 'btn btn-primary' %>
+  <% if user_signed_in? %>
+
+    <% if !@recipe.highlight && current_user.admin %>
+      <%= link_to 'Destacar', recipe_highlight_path(@recipe), method: :patch, class: 'btn btn-primary' %>
+    <% elsif current_user.admin %>
+      <%= link_to 'Remover destaque', recipe_highlight_path(@recipe), method: :patch, class: 'btn btn-primary' %>
+    <% end %>
+
+    <% if @recipe.author?(current_user) %>
+      <%= link_to t('.edit'), edit_recipe_path(@recipe), class: 'btn btn-primary' %>
+      <%= link_to t('.delete'), @recipe, method: :delete, class: 'btn btn-primary' %>
+    <% end %>
+
   <% end %>
+
   <%= link_to t('.back'), root_path, class: 'btn btn-secondary' %>
 </section>
 

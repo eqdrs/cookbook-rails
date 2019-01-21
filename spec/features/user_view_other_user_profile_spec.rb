@@ -8,7 +8,7 @@ feature 'User view other user profile' do
     other_recipe = create(:recipe, user: other_user)
 
     visit recipe_path(recipe)
-    click_on other_user.email
+    click_on other_user.name
 
     expect(page).to have_css('h2', text: other_user.name)
     expect(page).to have_css("img[src*='profile_placeholder']")

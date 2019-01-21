@@ -36,7 +36,7 @@ feature 'User register recipe' do
     expect(page).to have_css('p', text: 'Misturar tudo e servir. Adicione '\
                                         'limão a gosto.')
     expect(page).to have_css('h3', text: 'Autor')
-    expect(page).to have_css('p', text: user.email)
+    expect(page).to have_css('p', text: user.name)
     expect(page).to have_css("img[src*='tabule.jpg']")
   end
 
@@ -71,7 +71,7 @@ feature 'User register recipe' do
     expect(page).to have_css('p', text: 'Misturar tudo e servir. Adicione '\
                                         'limão a gosto.')
     expect(page).to have_css('h3', text: 'Autor')
-    expect(page).to have_css('p', text: user.email)
+    expect(page).to have_css('p', text: user.name)
     expect(page).to have_css("img[src*='noimage']")
   end
 

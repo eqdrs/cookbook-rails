@@ -16,7 +16,7 @@ feature 'User sign up' do
     expect(current_path).to eq root_path
     expect(page).not_to have_link('Criar conta')
     expect(page).not_to have_link('Entrar')
-    expect(page).to have_content('Olá, teste@gmail.com')
+    expect(page).to have_content('Olá, Fulano de Souza')
     expect(page).to have_link('Sair')
   end
 
@@ -34,12 +34,12 @@ feature 'User sign up' do
     expect(current_path).to eq root_path
     expect(page).not_to have_link('Criar conta')
     expect(page).not_to have_link('Entrar')
-    expect(page).to have_content("Olá, #{user.email}")
+    expect(page).to have_content("Olá, #{user.name}")
     expect(page).to have_link('Sair')
   end
 
   scenario 'and can logout' do
-    login_user
+    user = login_user
 
     visit root_path
     click_on 'Sair'
@@ -47,7 +47,7 @@ feature 'User sign up' do
     expect(current_path).to eq root_path
     expect(page).to have_link('Criar conta')
     expect(page).to have_link('Entrar')
-    expect(page).not_to have_content('Olá, teste@gmail.com')
+    expect(page).not_to have_content("Olá, #{user.name}")
     expect(page).not_to have_link('Sair')
   end
 end

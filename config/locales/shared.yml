@@ -7,7 +7,7 @@
       register_recipe_type: Cadastrar tipo de receita
       register_cuisine: Cadastrar cozinha
       sign_out: Sair
-      hello: Olá, %{email}
+      hello: Olá, %{name}
       search_label: Busca
       search_button: Buscar
       type: Digite algo

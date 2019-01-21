@@ -21,7 +21,7 @@ feature 'Visitor view recipe details' do
     expect(page).to have_css('h3', text: 'Como Preparar')
     expect(page).to have_css('p', text: recipe.cook_method)
     expect(page).to have_css('h3', text: 'Autor')
-    expect(page).to have_css('p', text: user.email)
+    expect(page).to have_css('p', text: user.name)
   end
 
   scenario 'and return to recipe list' do

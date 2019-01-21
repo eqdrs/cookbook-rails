@@ -1,7 +1,8 @@
 class RecipesController < ApplicationController
-  before_action :set_recipe, only: %i[show edit update]
+  before_action :set_recipe, only: %i[show edit update destroy]
   before_action :authenticate_user!, only: %i[new create edit update destroy]
   before_action :verify_author, only: %i[edit update destroy]
+  before_action :verify_admin, only: %i[highlight_recipe]
 
   def index
     @recipes = Recipe.all
@@ -49,9 +50,14 @@ class RecipesController < ApplicationController
   end
 
   def destroy
-    @recipe = Recipe.find(params[:id])
     @recipe.destroy
     redirect_to root_path, notice: 'Receita apagada com sucesso!'
+  end
+
+  def highlight_recipe
+    @recipe = Recipe.find(params[:recipe_id])
+    @recipe.toggle(:highlight).update(params.permit(:highlight))
+    redirect_to @recipe
   end
 
   private
@@ -63,6 +69,10 @@ class RecipesController < ApplicationController
   def verify_author
     @recipe = Recipe.find(params[:id])
     @recipe.user.email != current_user.email && (redirect_to root_path)
+  end
+
+  def verify_admin
+    (!current_user.admin) && (redirect_to root_path)
   end
 
   def recipe_params

@@ -38,7 +38,7 @@ feature 'User update recipe' do
     expect(page).to have_css('p', text: 'Faça um bolo e uma cobertura de '\
                                         'chocolate')
     expect(page).to have_css('h3', text: 'Autor')
-    expect(page).to have_css('p', text: user.email)
+    expect(page).to have_css('p', text: user.name)
   end
 
   scenario 'and must fill in all fields' do
