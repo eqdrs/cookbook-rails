@@ -13,7 +13,7 @@
 <p><%= @recipe.cook_method %></p>
 <hr class="my-4">
 <h3><%= t('.author') %></h3>
-<p><%= @recipe.user.email %></p>
+<p><%= link_to @recipe.user.email, @recipe.user %></p>
 <hr class="my-4">
 <h3><%= t('.images') %></h3>
 <% if @recipe.photo.attached? %>

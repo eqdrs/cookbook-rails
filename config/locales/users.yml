@@ -14,4 +14,7 @@
       submit: Salvar alterações
     my_lists:
       title: Minhas listas de receitas
-      
+    user:
+      no_recipes: O usuário ainda não cadastrou nenhuma receita.
+      has_recipes: O usuário possui %{length} receita(s) cadastradas(s)
+      user_recipes: Receitas do usuário

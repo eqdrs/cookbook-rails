@@ -1,6 +1,19 @@
-<h3><%= user.email %></h3>
+<h2 class="mt-4"><%= user.email %></h2>
+<hr class="my-3">
+
 <% if user.photo.attached? %>
   <%= image_tag user.photo, {width: 200} %>
 <% else %>
   <%= image_tag 'profile_placeholder.jpg', {width: 200} %>
+<% end %>
+
+<h4 class="mt-4"><%= t('.user_recipes') %></h4>
+<% if user.recipes.any? %>
+  <h5><%= t('.has_recipes', length: user.recipes.length) %></h5>
+  <hr class="my-3">
+  <div class="row">
+    <%= render user.recipes %>
+  </div>
+<% else %>
+  <h5><%= t('.no_recipes') %></h5>
 <% end %>

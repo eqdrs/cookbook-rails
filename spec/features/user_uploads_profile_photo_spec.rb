@@ -8,7 +8,7 @@ feature 'User uploads a profile photo' do
                                         'profile.jpg')
     click_on 'Salvar alterações'
 
-    expect(page).to have_css('h3', text: user.email)
+    expect(page).to have_css('h2', text: user.email)
     expect(page).to have_css("img[src*='profile.jpg']")
   end
 
