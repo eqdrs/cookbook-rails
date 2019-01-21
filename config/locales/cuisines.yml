@@ -15,6 +15,6 @@
         one: Cozinha
         other: Cozinhas
   cuisines:
-    new:
+    form:
       title: Cadastro de cozinha
       submit: Enviar

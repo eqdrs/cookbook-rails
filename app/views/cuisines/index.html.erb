@@ -1,0 +1,5 @@
+<h2 class="mt-4">Cozinhas cadastradas</h2>
+
+<% @cuisines.each do |cuisine| %>
+  <p><%= link_to cuisine.name, cuisine %></p>
+<% end %>

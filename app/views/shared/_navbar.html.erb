@@ -10,18 +10,21 @@
       <li class="nav-item">
         <%= link_to t('.home'), root_path, class: 'nav-link' %>
       </li>
+      <% if user_signed_in? && current_user.admin %>
+        <li class="nav-item">
+          <%= link_to t('.register_recipe_type'), new_recipe_type_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to t('.register_cuisine'), new_cuisine_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Ver cozinhas', cuisines_path, class: 'nav-link' %>
+        </li>
+      <% end %>
       <% if user_signed_in? %>
         <li class="nav-item">
           <%= link_to t('.register_recipe'), new_recipe_path, class: 'nav-link' %>
         </li>
-      <% end %>
-      <li class="nav-item">
-        <%= link_to t('.register_recipe_type'), new_recipe_type_path, class: 'nav-link' %>
-      </li>
-      <li class="nav-item">
-        <%= link_to t('.register_cuisine'), new_cuisine_path, class: 'nav-link' %>
-      </li>
-      <% if user_signed_in? %>
         <li class="nav-item">
           <%= link_to 'Criar lista', new_recipes_list_path, class: 'nav-link' %>
         </li>
