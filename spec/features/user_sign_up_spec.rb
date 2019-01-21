@@ -4,7 +4,11 @@ feature 'User sign up' do
   scenario 'succesfully' do
     visit root_path
     click_on 'Criar conta'
+    fill_in 'Nome', with: 'Fulano de Souza'
+    fill_in 'Cidade', with: 'Rio de Janeiro'
     fill_in 'Email', with: 'teste@gmail.com'
+    fill_in 'Twitter', with: ''
+    fill_in 'Facebook', with: 'www.facebook.com/fulano'
     fill_in 'Senha', with: '123456'
     fill_in 'Confirme sua senha', with: '123456'
     click_on 'Inscrever-se'

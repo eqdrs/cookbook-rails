@@ -1,9 +1,0 @@
-<%= render current_user %>
-
-<%= form_with model: current_user, method: :patch, class: 'mt-4', local: true do |f| %>
-  <div class="form-group">
-  <%= f.label :photo %>
-  <%= f.file_field :photo %>
-  </div>
-  <%= f.submit t('.submit'), class: 'btn btn-primary' %>
-<% end %>

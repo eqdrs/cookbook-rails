@@ -6,4 +6,6 @@ class User < ApplicationRecord
   has_many :recipes, dependent: :destroy
   has_many :recipes_lists, dependent: :destroy
   has_one_attached :photo
+
+  validates :name, :city, presence: true
 end

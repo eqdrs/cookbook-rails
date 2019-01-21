@@ -2,6 +2,8 @@
   activerecord:
     attributes:
       user:
+        name: Nome
+        city: Cidade
         email: Email
         password: Senha
         photo: Foto
@@ -9,6 +11,14 @@
       user:
         one: Usuário
         other: Usuários
+    errors:
+      models:
+        user:
+          attributes:
+            name:
+              blank: O campo de nome é obrigatório
+            city:
+              blank: O campo de cidade é obrigatório
   users:
     edit:
       submit: Salvar alterações
@@ -18,3 +28,4 @@
       no_recipes: O usuário ainda não cadastrou nenhuma receita.
       has_recipes: O usuário possui %{length} receita(s) cadastradas(s)
       user_recipes: Receitas do usuário
+      personal_info: Informações pessoais

@@ -1,4 +1,4 @@
-<h2 class="mt-4"><%= user.email %></h2>
+<h2 class="mt-4"><%= user.name %></h2>
 <hr class="my-3">
 
 <% if user.photo.attached? %>
@@ -6,6 +6,13 @@
 <% else %>
   <%= image_tag 'profile_placeholder.jpg', {width: 200} %>
 <% end %>
+
+<h4 class="mt-4"><%= t('.personal_info') %></h4>
+<hr class="my-3">
+<h5>Email: <%= user.email %></h5>
+<h5>Cidade: <%= user.city %></h5>
+<h5>Facebook: <%= user.facebook %></h5>
+<h5>Twitter: <%= user.twitter %></h5>
 
 <h4 class="mt-4"><%= t('.user_recipes') %></h4>
 <% if user.recipes.any? %>
