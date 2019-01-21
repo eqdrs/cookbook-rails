@@ -4,7 +4,10 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :city, :facebook, :twitter])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :city, :facebook, :twitter, :photo])
-  end 
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[name city facebook
+                                                         twitter])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[name city
+                                                                facebook
+                                                                twitter photo])
+  end
 end

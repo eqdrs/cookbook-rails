@@ -1,4 +1,9 @@
-<h1><%= @recipe_type.name %></h1>
+<h1 class="mt-4"><%= @recipe_type.name %></h1>
+
+<% if user_signed_in? && current_user.admin %>
+  <%= link_to 'Editar', edit_recipe_type_path(@recipe_type), class: 'btn btn-primary' %>
+  <hr class="my-4">
+<% end %>
 
 <% if @recipe_type.recipes.any? %>
   <h3><%= @recipe_type.recipes.length %> receita(s) nesta categoria</h3>

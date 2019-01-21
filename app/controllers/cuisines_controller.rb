@@ -39,7 +39,7 @@ class CuisinesController < ApplicationController
   private
 
   def verify_admin
-    (!current_user.admin) && (redirect_to root_path)
+    !current_user.admin && (redirect_to root_path)
   end
 
   def cuisine_params

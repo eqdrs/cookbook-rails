@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :recipes do
     patch 'highlight_recipe', to: 'recipes#highlight_recipe', as: 'highlight'
   end
-  resources :recipe_types, only: %i[show new create]
+  resources :recipe_types, only: %i[index show new create edit update]
   resources :cuisines, only: %i[index show new create edit update]
   get "/search", to: "recipes#search"
   resources :users, only: %i[show edit update] do

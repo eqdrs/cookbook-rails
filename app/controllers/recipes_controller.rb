@@ -72,7 +72,7 @@ class RecipesController < ApplicationController
   end
 
   def verify_admin
-    (!current_user.admin) && (redirect_to root_path)
+    !current_user.admin && (redirect_to root_path)
   end
 
   def recipe_params
