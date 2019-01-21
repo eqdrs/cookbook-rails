@@ -31,12 +31,12 @@ feature 'Admin edits recipe type' do
 
   scenario 'and the name must be unique' do
     recipe_type = create(:recipe_type, name: 'Sobremesa')
-    create(:recipe_type, name: 'Brasileira')
+    create(:recipe_type, name: 'Prato principal')
     admin = create(:admin)
 
     login_as(admin, scope: :user)
     visit edit_recipe_type_path(recipe_type)
-    fill_in 'Nome', with: 'BRASILEIRA'
+    fill_in 'Nome', with: 'PRATO PRINCIPAL'
     click_on 'Enviar'
 
     expect(page).to have_content('Este tipo de receita já existe!')
