@@ -1,5 +1,6 @@
 class RecipesList < ApplicationRecord
-  has_and_belongs_to_many :recipes
+  has_many :recipes_list_recipes, dependent: :destroy
+  has_many :recipes, through: :recipes_list_recipes
   belongs_to :user
 
   validates :name, :recipes, presence: true
