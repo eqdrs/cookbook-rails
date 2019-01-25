@@ -7,6 +7,17 @@
   <h1 class="display-4 mt-3"><%= @recipe.title %></h1>
 </div>
 
+<% if user_signed_in? %>
+  <hr class="my-4">
+  <%= form_tag recipe_add_to_list_path(@recipe), method: "patch", class: "form-inline my-2 my-lg-0" do %>
+    <%= label_tag :recipes_list_ids, 'Adicionar à lista' %>
+    <%= select_tag :recipes_list_ids, 
+                  options_from_collection_for_select(@recipes_lists, :id, :name), 
+                  class: 'form-control col-md-2 ml-3 mr-3' %>
+    <%= submit_tag 'Adicionar', class: "btn btn-outline-success my-2 my-sm-0" %>
+  <% end %>
+<% end %>
+
 <hr class="my-4">
 <h3><%= t('.details') %></h3>
 <p><%= @recipe.recipe_type.name %></p>

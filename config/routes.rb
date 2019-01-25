@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: 'recipes#index'
   resources :recipes do
     patch 'highlight_recipe', to: 'recipes#highlight_recipe', as: 'highlight'
+    patch 'add_to_list', to: 'recipes#add_to_list', as: 'add_to_list'
   end
   resources :recipe_types, only: %i[index show new create edit update]
   resources :cuisines, only: %i[index show new create edit update]

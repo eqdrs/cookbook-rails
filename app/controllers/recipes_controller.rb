@@ -14,7 +14,9 @@ class RecipesController < ApplicationController
     @keyword = params[:keyword]
   end
 
-  def show; end
+  def show
+    @recipes_lists = RecipesList.where(user: current_user)
+  end
 
   def new
     @recipe = Recipe.new
@@ -60,6 +62,14 @@ class RecipesController < ApplicationController
     redirect_to @recipe
   end
 
+  def add_to_list
+    @recipe = Recipe.find(params[:recipe_id])
+    @recipes_list = RecipesList.find(params[:recipes_list_ids])
+    @recipes_list.recipes << @recipe
+    redirect_to @recipe, notice: 'Receita adicionada à lista '\
+                                 "#{@recipes_list.name}!"
+  end
+
   private
 
   def set_recipe
@@ -78,6 +88,6 @@ class RecipesController < ApplicationController
   def recipe_params
     params.require(:recipe).permit(:title, :recipe_type_id, :cuisine_id,
                                    :difficulty, :cook_time, :ingredients,
-                                   :cook_method, :photo)
+                                   :cook_method, :photo, recipes_list_ids: [])
   end
 end
