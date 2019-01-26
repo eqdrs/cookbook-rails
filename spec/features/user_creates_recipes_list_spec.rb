@@ -93,13 +93,18 @@ feature 'User creates recipes list' do
 
   scenario "and can't add duplicated recipes to the list" do
     user = login_user
-    cake = create(:recipe, title: 'Cake')
-    recipes_list = RecipesList.create!(name: 'Festa de aniversário',
-                                       recipe_ids: [cake.id],
-                                       user: user)
+    cake = create(:recipe, title: 'Bolo')
+    biscuit = create(:recipe, title: 'Biscoito')
+    RecipesList.create!(name: 'Festa de aniversário',
+                        recipe_ids: [cake.id],
+                        user: user)
+    RecipesList.create!(name: 'Ceia de natal',
+                        recipe_ids: [biscuit.id],
+                        user: user)
 
     visit recipe_path(cake)
 
-    expect(page).not_to have_content recipes_list.name
+    expect(page).not_to have_content 'Festa de aniversário'
+    expect(page).to have_content 'Ceia de natal'
   end
 end
