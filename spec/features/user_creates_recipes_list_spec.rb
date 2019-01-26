@@ -90,4 +90,16 @@ feature 'User creates recipes list' do
     expect(page).to have_link cake.title
     expect(page).not_to have_link cheeseboard.title
   end
+
+  scenario "and can't add duplicated recipes to the list" do
+    user = login_user
+    cake = create(:recipe, title: 'Cake')
+    recipes_list = RecipesList.create!(name: 'Festa de aniversário',
+                                       recipe_ids: [cake.id],
+                                       user: user)
+
+    visit recipe_path(cake)
+
+    expect(page).not_to have_content recipes_list.name
+  end
 end

@@ -1,6 +1,7 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: %i[show edit update destroy]
-  before_action :authenticate_user!, only: %i[new create edit update destroy]
+  before_action :authenticate_user!, only: %i[new create edit update destroy
+                                              highlight_recipe add_to_list]
   before_action :verify_author, only: %i[edit update destroy]
   before_action :verify_admin, only: %i[highlight_recipe]
 
@@ -15,7 +16,8 @@ class RecipesController < ApplicationController
   end
 
   def show
-    @recipes_lists = RecipesList.where(user: current_user)
+    subquery = @recipe.recipes_lists.select(:id)
+    @recipes_lists = RecipesList.where.not(id: subquery)
   end
 
   def new
