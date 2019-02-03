@@ -2,6 +2,9 @@ Documentation:
   Enabled: false
 Rails:
   Enabled: true
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+  Enabled: true
 Style/FrozenStringLiteralComment:
   Enabled: false
 AllCops:

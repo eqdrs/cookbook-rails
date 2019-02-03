@@ -1,6 +1,10 @@
 <div class="col-md-4">
   <div class="card mb-4 shadow-sm">
-    <%= image_tag 'https://via.placeholder.com/500x255', class: 'card-img-top' %>
+    <% if recipe.photo.attached? %>
+      <%= image_tag recipe.photo, class: 'card-img-top' %>
+    <% else %>
+      <%= image_tag 'https://via.placeholder.com/500x255', class: 'card-img-top' %>
+    <% end %>
     <div class="card-body">
       <h1 class="h4">
         <% if recipe.highlight %>

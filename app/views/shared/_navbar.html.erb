@@ -11,18 +11,24 @@
         <%= link_to t('.home'), root_path, class: 'nav-link' %>
       </li>
       <% if user_signed_in? && current_user.admin %>
-        <li class="nav-item">
-          <%= link_to t('.register_recipe_type'), new_recipe_type_path, class: 'nav-link' %>
-        </li>
-        <li class="nav-item">
-          <%= link_to t('.register_cuisine'), new_cuisine_path, class: 'nav-link' %>
-        </li>
-        <li class="nav-item">
-          <%= link_to 'Ver cozinhas', cuisines_path, class: 'nav-link' %>
-        </li>
-        <li class="nav-item">
-          <%= link_to 'Ver tipos de receita', recipe_types_path, class: 'nav-link' %>
-        </li>
+        <div class="dropdown nav-item">
+          <a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">
+            Cozinhas
+          </a>
+          <div class="dropdown-menu">
+            <%= link_to 'Ver cozinhas', cuisines_path, class: 'dropdown-item' %>
+            <%= link_to t('.register_cuisine'), new_cuisine_path, class: 'dropdown-item' %>
+          </div>
+        </div>
+        <div class="dropdown nav-item">
+          <a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">
+            Tipos de receita
+          </a>
+          <div class="dropdown-menu">
+            <%= link_to 'Ver tipos de receita', recipe_types_path, class: 'dropdown-item' %>
+            <%= link_to t('.register_recipe_type'), new_recipe_type_path, class: 'dropdown-item' %>
+          </div>
+        </div>
       <% end %>
       <% if user_signed_in? %>
         <li class="nav-item">

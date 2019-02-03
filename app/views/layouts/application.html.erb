@@ -4,18 +4,19 @@
     <title>Cookbook</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body style="font-family:Raleway">
     <%= render 'shared/navbar' %>
     <div class="main">
       <!-- flashes goes here -->
       <div class="container">
         <% flash.each do |name, msg| %>
-          <p  class="alert alert-success alert-dismissible fade show">
+          <p class="alert alert-success alert-dismissible fade show">
             <%= msg %>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>

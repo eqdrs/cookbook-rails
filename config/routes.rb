@@ -12,4 +12,10 @@ Rails.application.routes.draw do
     get 'my_lists', to: 'users#my_lists', as: 'lists'
   end
   resources :recipes_lists, only: %i[show new create]
+  namespace :api, defaults: { format: :JSON } do
+    namespace :v1 do
+      get 'recipes/:id', to: 'recipes#show'
+    end
+  end
+
 end
