@@ -23,4 +23,72 @@ RSpec.describe 'Recipes API' do
       expect(response.body).to include 'Receita inexistente!'
     end
   end
+
+  describe 'POST' do
+    it 'register new recipe succesfully' do
+      recipe_type = create(:recipe_type)
+      cuisine = create(:cuisine)
+      user = create(:user)
+
+      post '/api/v1/recipes/new', params: { recipe:
+                                            { title: 'Tabule',
+                                              recipe_type_id: recipe_type.id,
+                                              cuisine_id: cuisine.id,
+                                              difficulty: 'Médio',
+                                              cook_time: 30,
+                                              ingredients: 'Trigo e cebola',
+                                              cook_method: 'Misturar tudo.',
+                                              user_id: user.id } }
+
+      hash = JSON.parse(response.body)
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include 'Receita cadastrada com sucesso!'
+      expect(hash['recipe']['title']).to eq 'Tabule'
+      expect(hash['recipe']['recipe_type_id']).to eq recipe_type.id
+      expect(hash['recipe']['cuisine_id']).to eq cuisine.id
+      expect(hash['recipe']['difficulty']).to eq 'Médio'
+      expect(hash['recipe']['cook_time']).to eq 30
+      expect(hash['recipe']['ingredients']).to eq 'Trigo e cebola'
+      expect(hash['recipe']['cook_method']).to eq 'Misturar tudo.'
+      expect(hash['recipe']['user_id']).to eq user.id
+      expect(Recipe.count).to eq 1
+    end
+
+    it 'must enter required params' do
+      user = create(:user)
+
+      post '/api/v1/recipes/new', params: { recipe:
+                                            { title: '',
+                                              recipe_type_id: '',
+                                              cuisine_id: '',
+                                              difficulty: '',
+                                              cook_time: '',
+                                              ingredients: '',
+                                              cook_method: '',
+                                              user_id: user.id } }
+
+      expect(response).to have_http_status(:precondition_failed)
+      expect(response.body).to include 'Você deve informar todos os campos!'
+      expect(Recipe.count).to eq 0
+    end
+
+    it 'register new recipe succesfully' do
+      recipe_type = create(:recipe_type)
+      cuisine = create(:cuisine)
+
+      post '/api/v1/recipes/new', params: { recipe:
+                                            { title: 'Tabule',
+                                              recipe_type_id: recipe_type.id,
+                                              cuisine_id: cuisine.id,
+                                              difficulty: 'Médio',
+                                              cook_time: 30,
+                                              ingredients: 'Trigo e cebola',
+                                              cook_method: 'Misturar tudo.',
+                                              user_id: 1 } }
+
+      expect(response).to have_http_status(:precondition_failed)
+      expect(response.body).to include 'Usuário inválido!'
+      expect(Recipe.count).to eq 0
+    end
+  end
 end
