@@ -25,7 +25,7 @@ RSpec.describe 'Recipes API' do
   end
 
   describe 'POST' do
-    it 'register new recipe succesfully' do
+    it 'should register new recipe succesfully' do
       recipe_type = create(:recipe_type)
       cuisine = create(:cuisine)
       user = create(:user)
@@ -93,12 +93,12 @@ RSpec.describe 'Recipes API' do
   end
 
   describe 'PATCH' do
-    it 'user edits recipe successfully' do
+    it 'should edit recipe successfully' do
       recipetype = create(:recipe_type)
       cuisine = create(:cuisine)
       recipe = create(:recipe, title: 'Feijoada')
 
-      patch '/api/v1/recipes/1/edit', params: { recipe:
+      patch '/api/v1/recipes/1', params: { recipe:
                                                 { title: 'Tabule',
                                                   recipe_type_id: recipetype.id,
                                                   cuisine_id: cuisine.id,
@@ -121,10 +121,10 @@ RSpec.describe 'Recipes API' do
       expect(hash['recipe']['user_id']).to eq recipe.user.id
     end
 
-    it 'user must enter required params' do
+    it 'must enter required params' do
       create(:recipe)
 
-      patch '/api/v1/recipes/1/edit', params: { recipe:
+      patch '/api/v1/recipes/1', params: { recipe:
                                                 { title: '',
                                                   recipe_type_id: '',
                                                   cuisine_id: '',
@@ -143,7 +143,7 @@ RSpec.describe 'Recipes API' do
       cuisine = create(:cuisine)
       user = create(:user)
 
-      patch '/api/v1/recipes/1/edit', params: { recipe:
+      patch '/api/v1/recipes/1', params: { recipe:
                                                 { title: 'Tabule',
                                                   recipe_type_id: recipetype.id,
                                                   cuisine_id: cuisine.id,
