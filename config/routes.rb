@@ -14,9 +14,7 @@ Rails.application.routes.draw do
   resources :recipes_lists, only: %i[show new create]
   namespace :api, defaults: { format: :JSON } do
     namespace :v1 do
-      get 'recipes/:id', to: 'recipes#show'
-      post 'recipes/new', to: 'recipes#create'
-      patch 'recipes/:id', to: 'recipes#update'
+      resources :recipes, only: %i[show create update destroy]
     end
   end
 

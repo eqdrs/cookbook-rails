@@ -1,9 +1,10 @@
 class Api::V1::RecipesController < Api::V1::ApplicationController
+  before_action :set_recipe, only: %i[show update destroy validate_recipe]
   before_action :validate_user, only: %i[create]
-  before_action :validate_recipe, only: %i[update]
+  before_action :validate_recipe, only: %i[update destroy]
+
   def show
-    recipe = Recipe.find_by('id = ?', params[:id])
-    return render json: recipe unless recipe.nil?
+    return render json: @recipe unless @recipe.nil?
 
     render json: { text: 'Receita inexistente!' }, status: :not_found
   end
@@ -19,16 +20,24 @@ class Api::V1::RecipesController < Api::V1::ApplicationController
   end
 
   def update
-    recipe = Recipe.find_by('id = ?', params[:id])
-    if recipe.update(recipe_params)
-      render json: { recipe: recipe, text: 'Receita atualizada com sucesso!' }
+    if @recipe.update(recipe_params)
+      render json: { recipe: @recipe, text: 'Receita atualizada com sucesso!' }
     else
       render json: { text: 'Você deve informar todos os campos!' },
              status: :precondition_failed
     end
   end
 
+  def destroy
+    @recipe.destroy
+    render json: { text: 'Receita apagada com sucesso!' }
+  end
+
   private
+
+  def set_recipe
+    @recipe = Recipe.find_by('id = ?', params[:id])
+  end
 
   def validate_user
     user = User.find_by('id = ?', params[:recipe][:user_id])
@@ -37,9 +46,8 @@ class Api::V1::RecipesController < Api::V1::ApplicationController
   end
 
   def validate_recipe
-    recipe = Recipe.find_by('id = ?', params[:id])
-    recipe.nil? && (return render json: { text: 'Receita inexistente!' },
-                                  status: :not_found)
+    @recipe.nil? && (return render json: { text: 'Receita inválida!' },
+                                   status: :not_found)
   end
 
   def recipe_params

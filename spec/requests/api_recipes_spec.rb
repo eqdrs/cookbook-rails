@@ -30,7 +30,7 @@ RSpec.describe 'Recipes API' do
       cuisine = create(:cuisine)
       user = create(:user)
 
-      post '/api/v1/recipes/new', params: { recipe:
+      post '/api/v1/recipes', params: { recipe:
                                             { title: 'Tabule',
                                               recipe_type_id: recipe_type.id,
                                               cuisine_id: cuisine.id,
@@ -57,7 +57,7 @@ RSpec.describe 'Recipes API' do
     it 'must enter required params' do
       user = create(:user)
 
-      post '/api/v1/recipes/new', params: { recipe:
+      post '/api/v1/recipes', params: { recipe:
                                             { title: '',
                                               recipe_type_id: '',
                                               cuisine_id: '',
@@ -76,7 +76,7 @@ RSpec.describe 'Recipes API' do
       recipe_type = create(:recipe_type)
       cuisine = create(:cuisine)
 
-      post '/api/v1/recipes/new', params: { recipe:
+      post '/api/v1/recipes', params: { recipe:
                                             { title: 'Tabule',
                                               recipe_type_id: recipe_type.id,
                                               cuisine_id: cuisine.id,
@@ -154,7 +154,27 @@ RSpec.describe 'Recipes API' do
                                                   user_id: user.id } }
 
       expect(response).to have_http_status(:not_found)
-      expect(response.body).to include 'Receita inexistente!'
+      expect(response.body).to include 'Receita inválida!'
+    end
+  end
+
+  describe 'DELETE' do
+    it 'should delete recipe successfully' do
+      create(:recipe)
+
+      delete '/api/v1/recipes/1'
+
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include 'Receita apagada com sucesso!'
+      expect(Recipe.count).to eq 0
+    end
+
+    it 'invalid recipe' do
+      delete '/api/v1/recipes/1'
+
+      expect(response).to have_http_status(:not_found)
+      expect(response.body).to include 'Receita inválida!'
+      expect(Recipe.count).to eq 0
     end
   end
 end
