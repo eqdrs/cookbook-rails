@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       get 'recipes/:id', to: 'recipes#show'
       post 'recipes/new', to: 'recipes#create'
+      patch 'recipes/:id/edit', to: 'recipes#update'
     end
   end
 

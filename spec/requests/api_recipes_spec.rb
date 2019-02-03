@@ -72,7 +72,7 @@ RSpec.describe 'Recipes API' do
       expect(Recipe.count).to eq 0
     end
 
-    it 'register new recipe succesfully' do
+    it 'must be valid user' do
       recipe_type = create(:recipe_type)
       cuisine = create(:cuisine)
 
@@ -89,6 +89,72 @@ RSpec.describe 'Recipes API' do
       expect(response).to have_http_status(:precondition_failed)
       expect(response.body).to include 'Usuário inválido!'
       expect(Recipe.count).to eq 0
+    end
+  end
+
+  describe 'PATCH' do
+    it 'user edits recipe successfully' do
+      recipetype = create(:recipe_type)
+      cuisine = create(:cuisine)
+      recipe = create(:recipe, title: 'Feijoada')
+
+      patch '/api/v1/recipes/1/edit', params: { recipe:
+                                                { title: 'Tabule',
+                                                  recipe_type_id: recipetype.id,
+                                                  cuisine_id: cuisine.id,
+                                                  difficulty: 'Muito difícil',
+                                                  cook_time: 30,
+                                                  ingredients: 'Trigo e cebola',
+                                                  cook_method: 'Misturar tudo.',
+                                                  user_id: recipe.user.id } }
+
+      hash = JSON.parse(response.body)
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include 'Receita atualizada com sucesso!'
+      expect(hash['recipe']['title']).to eq 'Tabule'
+      expect(hash['recipe']['recipe_type_id']).to eq recipetype.id
+      expect(hash['recipe']['cuisine_id']).to eq cuisine.id
+      expect(hash['recipe']['difficulty']).to eq 'Muito difícil'
+      expect(hash['recipe']['cook_time']).to eq 30
+      expect(hash['recipe']['ingredients']).to eq 'Trigo e cebola'
+      expect(hash['recipe']['cook_method']).to eq 'Misturar tudo.'
+      expect(hash['recipe']['user_id']).to eq recipe.user.id
+    end
+
+    it 'user must enter required params' do
+      create(:recipe)
+
+      patch '/api/v1/recipes/1/edit', params: { recipe:
+                                                { title: '',
+                                                  recipe_type_id: '',
+                                                  cuisine_id: '',
+                                                  difficulty: '',
+                                                  cook_time: '',
+                                                  ingredients: '',
+                                                  cook_method: '',
+                                                  user_id: '' } }
+
+      expect(response).to have_http_status(:precondition_failed)
+      expect(response.body).to include 'Você deve informar todos os campos!'
+    end
+
+    it 'recipe must be valid' do
+      recipetype = create(:recipe_type)
+      cuisine = create(:cuisine)
+      user = create(:user)
+
+      patch '/api/v1/recipes/1/edit', params: { recipe:
+                                                { title: 'Tabule',
+                                                  recipe_type_id: recipetype.id,
+                                                  cuisine_id: cuisine.id,
+                                                  difficulty: 'Muito difícil',
+                                                  cook_time: 30,
+                                                  ingredients: 'Trigo e cebola',
+                                                  cook_method: 'Misturar tudo.',
+                                                  user_id: user.id } }
+
+      expect(response).to have_http_status(:not_found)
+      expect(response.body).to include 'Receita inexistente!'
     end
   end
 end
