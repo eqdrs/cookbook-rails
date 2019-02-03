@@ -14,7 +14,8 @@ Rails.application.routes.draw do
   resources :recipes_lists, only: %i[show new create]
   namespace :api, defaults: { format: :JSON } do
     namespace :v1 do
-      resources :recipes, only: %i[show create update destroy]
+      get 'form_data', to: 'recipes#form_data'
+      resources :recipes, only: %i[index show create update destroy]
     end
   end
 

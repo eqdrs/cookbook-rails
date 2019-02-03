@@ -55,8 +55,6 @@ RSpec.describe 'Recipes API' do
     end
 
     it 'must enter required params' do
-      user = create(:user)
-
       post '/api/v1/recipes', params: { recipe:
                                             { title: '',
                                               recipe_type_id: '',
@@ -65,29 +63,10 @@ RSpec.describe 'Recipes API' do
                                               cook_time: '',
                                               ingredients: '',
                                               cook_method: '',
-                                              user_id: user.id } }
+                                              user_id: '' } }
 
       expect(response).to have_http_status(:precondition_failed)
       expect(response.body).to include 'Você deve informar todos os campos!'
-      expect(Recipe.count).to eq 0
-    end
-
-    it 'must be valid user' do
-      recipe_type = create(:recipe_type)
-      cuisine = create(:cuisine)
-
-      post '/api/v1/recipes', params: { recipe:
-                                            { title: 'Tabule',
-                                              recipe_type_id: recipe_type.id,
-                                              cuisine_id: cuisine.id,
-                                              difficulty: 'Médio',
-                                              cook_time: 30,
-                                              ingredients: 'Trigo e cebola',
-                                              cook_method: 'Misturar tudo.',
-                                              user_id: 1 } }
-
-      expect(response).to have_http_status(:precondition_failed)
-      expect(response.body).to include 'Usuário inválido!'
       expect(Recipe.count).to eq 0
     end
   end

@@ -1,7 +1,11 @@
 class Api::V1::RecipesController < Api::V1::ApplicationController
   before_action :set_recipe, only: %i[show update destroy validate_recipe]
-  before_action :validate_user, only: %i[create]
   before_action :validate_recipe, only: %i[update destroy]
+
+  def index
+    last_recipes = Recipe.all.last(3)
+    render json: last_recipes
+  end
 
   def show
     return render json: @recipe unless @recipe.nil?
@@ -33,16 +37,18 @@ class Api::V1::RecipesController < Api::V1::ApplicationController
     render json: { text: 'Receita apagada com sucesso!' }
   end
 
+  def form_data
+    recipe_types = RecipeType.all
+    cuisines = Cuisine.all
+    users = User.all
+    render json: {recipe_types: recipe_types, cuisines: cuisines,
+                  users: users }
+  end
+
   private
 
   def set_recipe
     @recipe = Recipe.find_by('id = ?', params[:id])
-  end
-
-  def validate_user
-    user = User.find_by('id = ?', params[:recipe][:user_id])
-    user.nil? && (return render json: { text: 'Usuário inválido!' },
-                                status: :precondition_failed)
   end
 
   def validate_recipe
