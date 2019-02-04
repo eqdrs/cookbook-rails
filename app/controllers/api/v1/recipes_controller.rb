@@ -1,9 +1,11 @@
 class Api::V1::RecipesController < Api::V1::ApplicationController
   before_action :set_recipe, only: %i[show update destroy validate_recipe]
   before_action :validate_recipe, only: %i[update destroy]
+  before_action :verify_params, only: %i[create]
+  skip_before_action :verify_authenticity_token
 
   def index
-    last_recipes = Recipe.all.last(3)
+    last_recipes = Recipe.all.last(6)
     render json: last_recipes
   end
 
@@ -46,6 +48,11 @@ class Api::V1::RecipesController < Api::V1::ApplicationController
   end
 
   private
+
+  def verify_params
+    params[:recipe].is_a?(String) &&
+    (params[:recipe] = ActionController::Parameters.new(eval params[:recipe]))
+  end
 
   def set_recipe
     @recipe = Recipe.find_by('id = ?', params[:id])
