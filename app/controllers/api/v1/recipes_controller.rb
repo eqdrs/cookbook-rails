@@ -1,7 +1,7 @@
 class Api::V1::RecipesController < Api::V1::ApplicationController
   before_action :set_recipe, only: %i[show update destroy validate_recipe]
   before_action :validate_recipe, only: %i[update destroy]
-  before_action :verify_params, only: %i[create]
+  before_action :verify_params, only: %i[create update]
   skip_before_action :verify_authenticity_token
 
   def index
