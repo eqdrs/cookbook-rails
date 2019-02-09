@@ -1,8 +1,8 @@
 class Api::V1::RecipesController < Api::V1::ApplicationController
-  before_action :set_recipe, only: %i[show update destroy validate_recipe]
-  before_action :validate_recipe, only: %i[update destroy]
+  include ActionController::HttpAuthentication::Basic::ControllerMethods
+  before_action :set_recipe, only: %i[show update destroy]
   before_action :verify_params, only: %i[create update]
-  skip_before_action :verify_authenticity_token
+  before_action :basic_authentication, only: %i[create update destroy]
 
   def index
     last_recipes = Recipe.all.last(6)
@@ -17,6 +17,7 @@ class Api::V1::RecipesController < Api::V1::ApplicationController
 
   def create
     recipe = Recipe.new(recipe_params)
+    recipe.user = @user
     if recipe.save
       render json: { recipe: recipe, text: 'Receita cadastrada com sucesso!' }
     else
@@ -42,23 +43,18 @@ class Api::V1::RecipesController < Api::V1::ApplicationController
   def form_data
     recipe_types = RecipeType.all
     cuisines = Cuisine.all
-    users = User.all
-    render json: {recipe_types: recipe_types, cuisines: cuisines,
-                  users: users }
+    render json: { recipe_types: recipe_types, cuisines: cuisines }
   end
 
   private
 
   def verify_params
     params[:recipe].is_a?(String) &&
-    (params[:recipe] = ActionController::Parameters.new(eval params[:recipe]))
+      (params[:recipe] = ActionController::Parameters.new(eval params[:recipe]))
   end
 
   def set_recipe
     @recipe = Recipe.find_by('id = ?', params[:id])
-  end
-
-  def validate_recipe
     @recipe.nil? && (return render json: { text: 'Receita inválida!' },
                                    status: :not_found)
   end
@@ -66,6 +62,14 @@ class Api::V1::RecipesController < Api::V1::ApplicationController
   def recipe_params
     params.require(:recipe).permit(:title, :recipe_type_id, :cuisine_id,
                                    :difficulty, :cook_time, :ingredients,
-                                   :cook_method, :user_id)
+                                   :cook_method)
+  end
+
+  def basic_authentication
+    authenticate_with_http_basic do |email, password|
+      @user = User.find_by(email: email)
+      (!@user.nil? && @user.valid_password?(password)) && (return true)
+      request_http_basic_authentication
+    end
   end
 end
