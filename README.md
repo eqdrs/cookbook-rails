@@ -1,17 +1,26 @@
 # Cookbook
 
-### Instruções
+CookBook built with Ruby on Rails, made by me.
 
-Você e seu par devem executar as tarefas deste [Trello](https://trello.com/b/95Zg94pv)
-acompanhados pelo time Campus Code.
+### Run the project
 
-O fluxo de trabalho deve seguir o modelo Driver-Navigator do Pair Programming.
+Download the project:
 
-Ao final de cada cenário de teste sempre consulte os Seniors da Campus Code.
+`git clone git@github.com:eqdrs/cookbook-rails.git`
 
-Dependências:
+Install the dependencies:
+
+`bundle install`
+
+Run the server:
+
+`bundle exec rails s`
+
+### Run tests
+
+`bundle exec rspec`
+
+### Dependencies
 
 * Ruby 2.6.0
-
 * Rails 5.2.2
-
